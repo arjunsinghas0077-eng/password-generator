@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Generator</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #1e1e2f;
+      color: #f0f0f0;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      background: #2c2c44;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #ffcc00;
+    }
+
+    button {
+      background-color: #ffcc00;
+      color: #2c2c44;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #e6b800;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 20px;
+      background: #1e1e2f;
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: inline-block;
+      user-select: all;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Password Generator</h2>
+    <button onclick="generate()">Generate Password</button>
+    <button onclick="copyPassword()">Copy</button>
+    <p id="output">Your password will appear here</p>
+  </div>
+
+  <script>
+    function generate() {
+      let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?";
+      let password = "";
+      for (let i = 0; i < 12; i++) {
+        password += chars[Math.floor(Math.random() * chars.length)];
+      }
+      document.getElementById("output").innerText = password;
+    }
+
+    function copyPassword() {
+      const output = document.getElementById("output");
+      navigator.clipboard.writeText(output.innerText)
+        .then(() => alert("Password copied to clipboard!"))
+        .catch(() => alert("Failed to copy password"));
+    }
+  </script>
+
+</body>
+</html>
